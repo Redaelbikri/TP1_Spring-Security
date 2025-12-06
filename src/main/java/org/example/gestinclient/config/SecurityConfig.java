@@ -19,12 +19,12 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder encoder) {
         UserDetails user = User.withUsername("user")
-                .password(encoder.encode("user000"))
+                .password(encoder.encode("user"))
                 .roles("USER")
                 .build();
 
-        UserDetails admin = User.withUsername("soulayman")
-                .password(encoder.encode("soulayman000"))
+        UserDetails admin = User.withUsername("ADMIN")
+                .password(encoder.encode("admin"))
                 .roles("ADMIN")
                 .build();
 

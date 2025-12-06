@@ -19,11 +19,15 @@ public class GestinClientApplication {
     CommandLineRunner initData(ClientRepository repository) {
         return args -> {
             if (repository.count() == 0) {
-                repository.save(new Client(null, "Amine", 22));
-                repository.save(new Client(null, "Sara", 30));
-                repository.save(new Client(null, "Youssef", 19));
+                repository.save(Client.builder().nom("Amine").age(22).build());
+                repository.save(Client.builder().nom("Sara").age(30).build());
+                repository.save(Client.builder().nom("Youssef").age(19).build());
             }
-            repository.findAll().forEach(c -> System.out.println("Client: " + c.getNom() + " - " + c.getAge()));
+            repository.findAll().forEach(c ->
+                    System.out.println("Client: " + c.getNom() + " - " + c.getAge())
+            );
         };
     }
+
 }
+
