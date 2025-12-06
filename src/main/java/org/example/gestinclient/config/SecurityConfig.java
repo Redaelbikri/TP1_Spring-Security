@@ -55,7 +55,6 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 );
-        // CSRF est activé par défaut (on ne le désactive pas pour une app Thymeleaf)
         return http.build();
     }
 }

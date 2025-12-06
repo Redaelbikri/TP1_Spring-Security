@@ -26,7 +26,6 @@ public class ClientController {
         return "redirect:/clients";
     }
 
-    // LISTE + RECHERCHE → autorisée pour USER et ADMIN
     @GetMapping
     public String list(@RequestParam(value = "q", required = false) String q, Model model) {
         if (q != null && !q.isBlank()) {
@@ -38,8 +37,6 @@ public class ClientController {
         return "list";
     }
 
-
-    // AJOUT → réservé ADMIN
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/add")
     public String addForm(Model model) {
@@ -47,8 +44,6 @@ public class ClientController {
         return "form";
     }
 
-
-    // SAVE → réservé ADMIN
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public String save(@Valid @ModelAttribute("client") Client client, BindingResult br) {
@@ -59,8 +54,6 @@ public class ClientController {
         return "redirect:/clients";
     }
 
-
-    // EDIT → réservé ADMIN
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
@@ -72,8 +65,6 @@ public class ClientController {
         return "redirect:/clients";
     }
 
-
-    // DELETE → réservé ADMIN
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
