@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="utf-8"/>
+    <title>Formulaire client</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
-<body>
-$END$
+<body class="p-4">
+<div class="container">
+    <h3 th:text="${client.id} != null ? 'Modifier client' : 'Ajouter client'">Formulaire</h3>
+
+    <form th:action="@{/clients/save}" th:object="${client}" method="post" class="w-50">
+
+        <!-- 🔐 Token CSRF requis par Spring Security -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="mb-3">
+            <label class="form-label">Nom</label>
+            <input type="text" th:field="*{nom}" class="form-control"/>
+            <div class="text-danger" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Âge</label>
+            <input type="number" th:field="*{age}" class="form-control" min="1"/>
+            <div class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+        </div>
+
+        <button class="btn btn-success" type="submit">Enregistrer</button>
+        <a class="btn btn-secondary" th:href="@{/clients}">Annuler</a>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
